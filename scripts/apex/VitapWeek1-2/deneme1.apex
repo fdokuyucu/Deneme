@@ -1,0 +1,11 @@
+deneme1 ogr = new deneme1();
+ogr.deneme();
+ogr.art =false;
+ogr.className= 'yildiz';
+ogr.fenGread= 95;
+ogr.firstName='fatih';
+ogr.lastName='dokuyucu';
+ogr.language='turkish';
+ogr.mathGread= 85;
+ogr.sports=true;
+System.debug(ogr);

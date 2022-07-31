@@ -1,0 +1,1 @@
+select name,Account.Name, Account.industry FROM Contact WHERE Account.industry = 'Energy'
