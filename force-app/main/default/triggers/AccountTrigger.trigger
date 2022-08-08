@@ -19,6 +19,66 @@ trigger AccountTrigger on Account (before insert, before update, after insert, a
 
 
 /*
+trigger OppTrigger on Opportunity (after Insert, before insert, after update, before update) {
+    //Insert Operation - Assume I am inserting 5 record
+        //Before Context (Save Operation not yet happened)
+            //Trigger.new? --> Yes, it will be populated but no Id field populated
+            //Trigger.Old? --> null, Creating brand new record and its doesnot have any prior version
+
+            //Trigger.NewMap --> null
+            //Trigger.OldMap --> null
+        
+        //After Context
+            //Trigger.new? --> Yes, Have the Id field as well
+            //Trigger.Old? --> null, Creating brand new record and its doesnot have any prior version
+
+            //Trigger.NewMap --> Yes
+            //Trigger.OldMap --> null, Creating brand new record and its doesnot have any prior version
+
+    //Update Operation - Assume I am Updating 5 record
+        //Before Context (Save Operation not yet happened)
+            //Trigger.new? --> Populated with everything and have Ids as well
+            //Trigger.Old? --> (Older Version) Populated with everything and have Ids as well but the values will not be updated one
+
+            //Trigger.NewMap --> Populated with everything
+            //Trigger.OldMap --> (Older Version records)Populated with everything
+        
+        //After Context
+            //Trigger.new? --> Populated with everything and have Ids as well
+            //Trigger.Old? --> (Older Version) Populated with everything and have Ids as well but the values will not be updated one
+
+            //Trigger.NewMap --> Populated with everything
+            //Trigger.OldMap --> (Older Version records)Populated with everything
+
+
+//Q1. On which Object the operation is happening? (Write Trigger on this Object)
+//Q2. Does it includes updating the same record or validating the same record? (If,Yes) the go for before triggers
+//Q3. For which DML we have to consider the scenario?
+
+
+    if(Trigger.isUpdate){
+        if(Trigger.isBefore){
+            System.debug('Trigger.new from Before Context   '+Trigger.New);
+            List<Opportunity> oppNewList = Trigger.new;
+            Map<Id, Opportunity> oppNewMap = Trigger.newMap;
+            List<Opportunity> oppoldList = Trigger.Old;
+            Map<Id, Opportunity> oppOldMap = Trigger.OldMap;
+            //If the amount field is updated then i need to update the description field as "Amount Updated"
+            //amount field is updated and reduced from the prior description ==> "Amount value is reduced"
+            //amount field is updated and increased from prior value description ==> "Amount value is Increased"
+            for(Opportunity oppNewRecord : oppNewList){
+                decimal newAmountValue = oppNewRecord.Amount;
+                Opportunity oppOldRecord = Trigger.OldMap.get(oppNewRecord.Id);
+                decimal oldAmountValue = oppOldRecord.Amount;
+                if(newAmountValue < oldAmountValue){
+                    oppNewRecord.Description = 'Amount value is reduced';
+                } else if(newAmountValue > oldAmountValue){
+                    oppNewRecord.Description = 'Amount value is Increased';
+                }
+            }
+        }
+    }
+}
 
 if(trigger.isAfter && trigger.isUpdate){
         integer countWebSiteUpdate = 0;
