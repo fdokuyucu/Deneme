@@ -1,20 +1,18 @@
 trigger AccountTrigger on Account (before insert, before update, after insert, after update) {
+
+    if (trigger.isBefore&&trigger.isUpdate) {
+        AccountTriggerHandler.ValidateAnnualRevenue(trigger.new, trigger.old, trigger.newMap,trigger.oldMap );
+    }
   
 
-    system.debug('====Trigger START====');
-    if (trigger.isBefore) {
-        AccountTriggerHandler.updateAccountDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
-    }
+    // system.debug('====Trigger START====');
+    // if (trigger.isBefore) {
+    //     AccountTriggerHandler.updateAccountDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
+    // }
     
-    system.debug('====Trigger END====');
-    
-   
-    
-    
-    
-
-
-
+    // system.debug('====Trigger END====');
+        
+     
 
 
 
