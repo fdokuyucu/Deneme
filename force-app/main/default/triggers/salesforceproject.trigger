@@ -3,6 +3,10 @@ trigger salesforceproject on Salesforce_Project__c (before insert, after insert,
     if (trigger.isAfter&& trigger.isInsert) {
         SalesForceProjectTriggerHandler.createDefaultSalesForceTcisket(Trigger.New);
     }
+    if (trigger.isBefore && trigger.isUpdate) {
+        SalesforceProjectTriggerHandler.validateProjectCompletion(Trigger.New, Trigger.NewMap, Trigger.OldMap);
+    }
+
     
     
     

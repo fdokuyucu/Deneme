@@ -1,0 +1,4 @@
+public with sharing class CaseTriggerHandler2 {
+    public static integer countTriggerExecution =0;      
+    public static integer countRecordsUpdated =0;    
+}

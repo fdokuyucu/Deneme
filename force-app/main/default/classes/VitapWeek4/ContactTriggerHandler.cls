@@ -24,4 +24,14 @@ public class ContactTriggerHandler {
         }                                            
     
    }
+   public static void updateAccountRollUpField(set<id> accountIds) {
+
+    List<Account> listAccounts= [select id, Number_of_Contacts__c, (select id from Contacts) from account where id in : accountIds];
+    for (account eachAccount : listAccounts) {
+        List<Contact> accContacts= eachAccount.Contacts;
+        Integer noOfContacts= accContacts.size();
+        eachAccount.Number_of_Contacts__c= noOfContacts;
+    }
+    update listAccounts;
+   }
 }
