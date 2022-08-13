@@ -1,11 +1,26 @@
-trigger AccountTrigger on Account (before insert, before update, after insert, after update) {
+Trigger AccountTrigger on Account (before insert, after insert, before update, after update){
+    // if(trigger.isInsert && trigger.isAfter){
+    //     AccountTriggerHandler.CreateContact(trigger.New, trigger.OldMap);
+    // }
+    if (trigger.isAfter&& trigger.isUpdate) {
+        AccountTriggerHandler.AccountUpdate(trigger.new);
+    }      
+    if(trigger.isAfter&& trigger.isUpdate){
+        AccountTriggerHandler.AccountContactUpdate(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
+    }
+}
+// trigger AccountTrigger on Account (before insert, before update, after insert, after update) {
 
-    if (trigger.isBefore&&trigger.isUpdate) {
-        AccountTriggerHandler.ValidateAnnualRevenue(trigger.new, trigger.old, trigger.newMap,trigger.oldMap );
-    }
-    if (trigger.isAfter&&trigger.isUpdate) {
-        AccountTriggerHandler.updateVIPForAllContacts(trigger.new, trigger.old, trigger.newMap,trigger.oldMap);
-    }
+//     if (trigger.isInsert && trigger.isAfter) {
+//        AccountTriggerHandler.
+//     }
+
+    // if (trigger.isBefore&&trigger.isUpdate) {
+    //     AccountTriggerHandler.ValidateAnnualRevenue(trigger.new, trigger.old, trigger.newMap,trigger.oldMap );
+    // }
+    // if (trigger.isAfter&&trigger.isUpdate) {
+    //     AccountTriggerHandler.updateVIPForAllContacts(trigger.new, trigger.old, trigger.newMap,trigger.oldMap);
+    // }
   
 
     // system.debug('====Trigger START====');
@@ -220,4 +235,3 @@ if(trigger.isAfter && trigger.isUpdate){
     }
 
     */
-}

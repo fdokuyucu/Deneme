@@ -22,7 +22,10 @@ trigger contactTrigger on Contact (before insert, before update, after insert,af
             }
         }
         ContactTriggerHandler.updateAccountRollUpField(accountIds);
-        
+     
+    }
+    if (trigger.isBefore&&trigger.isInsert) {
+        ContactTriggerHandler.contactUpdate(trigger.new, trigger.newMap, trigger.old, trigger.oldMap);
     }
 
 

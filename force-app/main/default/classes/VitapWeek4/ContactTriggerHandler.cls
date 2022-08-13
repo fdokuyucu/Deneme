@@ -34,4 +34,23 @@ public class ContactTriggerHandler {
     }
     update listAccounts;
    }
+   public static void contactUpdate(List<Contact> cntTriggerNew,
+                                    Map<Id,Contact> cntTriggerNewMap,
+                                    List<Contact> cntTriggerOld,
+                                    map<id, contact> cntTriggerOldMap) {
+        Set<Id> AccId= new set<id>();
+       for (contact eachCon : cntTriggerNew) {
+        AccId.add(eachCon.AccountId);        
+       } 
+       List<Account> Acclist=[select id,Phone, (select AccountId,id, otherPhone from Contacts) from account where id in :AccId];
+       for (Account eachAcc : Acclist) {
+            for (contact eachCn : cntTriggerNew) {
+                eachCn.OtherPhone=eachAcc.Phone;
+
+            }
+       }
+       if (!Acclist.isEmpty()) {
+            update Acclist;
+       }                          
+   }
 }
