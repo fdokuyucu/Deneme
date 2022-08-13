@@ -1,4 +1,4 @@
-public class Calculator {
+public class tor {
     public void printNewMessage(String msg){
         
         System.debug(msg);
