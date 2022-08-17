@@ -14,31 +14,32 @@
 //         }
     
 //  }
-//     public static void updateVIPForAllContacts(List<Account> accTriggerNew,
-//                                                 List<Account> accTriggerOld,
-//                                                 Map<Id,Account> accTriggerNewMap,
-//                                                 Map<Id,Account> accTriggerOldMap) {
+public class AccountTriggerHandler {
+    public static void updateVIPForAllContacts(List<Account> accTriggerNew,
+                                                List<Account> accTriggerOld,
+                                                Map<Id,Account> accTriggerNewMap,
+                                                Map<Id,Account> accTriggerOldMap) {
         
 
-//         Set<Id> setAccId= new Set<Id>();
-//         for (account eachAcc : accTriggerNew) {
-//             if (eachAcc.VIP__c != accTriggerOldMap.get(eachAcc.id).VIP__c) {
-//                 setAccId.add(eachAcc.id);
-//             }
-//         }
+        Set<Id> setAccId= new Set<Id>();
+        for (account eachAcc : accTriggerNew) {
+            if (eachAcc.VIP__c != accTriggerOldMap.get(eachAcc.id).VIP__c) {
+                setAccId.add(eachAcc.id);
+            }
+        }
 
-//         if (!setAccId.isEmpty()) {
+        if (!setAccId.isEmpty()) {
                 
-//             List<Contact> listContacts =[SELECT id, Name, Account.id, VIP__c  FROM contact WHERE Account.id in:setAccId  ];   
+            List<Contact> listContacts =[SELECT id, Name, Account.id, VIP__c  FROM contact WHERE Account.id in:setAccId  ];   
             
-//             for (contact eachContact : listContacts) {
-//                 Account newAcoountRecord= accTriggerNewMap.get(eachContact.AccountId);
-//                 Boolean accVIP= newAcoountRecord.VIP__c;
-//                 eachContact.VIP__c=accVIP;
-//             }
-//             update listContacts;
-//         }
-// //     }
+            for (contact eachContact : listContacts) {
+                Account newAcoountRecord= accTriggerNewMap.get(eachContact.AccountId);
+                Boolean accVIP= newAcoountRecord.VIP__c;
+                eachContact.VIP__c=accVIP;
+            }
+            update listContacts;
+        }
+    }
 //     public static void createContact(List<Account> triggerNew, Map<Id,Account> triggerOldmap) {
 //         List<Contact> Listcont=new List<Contact>();
 //         for (account eachAcc : trigger.new) {
@@ -54,7 +55,7 @@
         
 //     }
 // }
-public class AccountTriggerHandler {
+
     public static void CreateContact(List<Account> triggerNew, map<Id, Account> triggerOldMap) {
         List<Contact> listOfContact = new List<Contact>();
         for(Account acc : triggerNew){

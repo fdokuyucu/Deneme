@@ -1,4 +1,11 @@
 public with sharing class SalesForceProjectTriggerHandler {
+   @future
+   public static void updateProjectDescription(Set<Id> setSPids){
+
+
+   }
+
+
    public static void createDefaultSalesForceTcisket(List<Salesforce_Project__c> spTriggerNew) {
     List<Salesforce_Ticket__c> newSTList = new List<Salesforce_Ticket__c>();
 
