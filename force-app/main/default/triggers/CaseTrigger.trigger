@@ -29,4 +29,7 @@ after update, before delete, after delete) {
     if (trigger.isBefore&&trigger.isInsert) {
         CaseTriggerHandler.CaseInsert(trigger.new, trigger.old, trigger.newMap,trigger.oldMap);
     }
-}
+    if(trigger.isAfter&&trigger.isInsert){
+        CaseTriggerHandler.createChildCase(trigger.new, trigger.old, trigger.newMap,trigger.oldMap);
+    }
+} 

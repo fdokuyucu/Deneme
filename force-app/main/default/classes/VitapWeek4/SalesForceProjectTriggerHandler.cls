@@ -1,7 +1,12 @@
 public with sharing class SalesForceProjectTriggerHandler {
    @future
    public static void updateProjectDescription(Set<Id> setSPids){
+    List<Salesforce_Project__c> listSP = [select id, name, description__c from Salesforce_Project__c where id in :setSPIds];
 
+        for (salesforce_project__c eachSP : listSP) {
+            eachSP.Description__c = eachSP.Description__c + '. Updated from future';
+        }
+        update listSP;
 
    }
 
