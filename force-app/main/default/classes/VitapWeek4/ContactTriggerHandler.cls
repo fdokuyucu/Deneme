@@ -53,4 +53,31 @@ public class ContactTriggerHandler {
             update Acclist;
        }                          
    }
+   public static void UpdateAccount(list <Contact> ccTriggerNew,
+                                    list <contact> ccTriggerOld,
+                                    map <id,Contact> ccTriggerNewMap,
+                                    map <id,Contact> ccTriggerOldMap) {
+    set <id> contIds = new set<id> ();
+    for (contact eachCont : ccTriggerNew) {
+        if(eachCont.main_contact_person__c!=ccTriggerOldMap.get(eachCont.id).main_contact_person__c){
+            contIds.add(eachCont.AccountId);
+        }
+        system.debug(contIds);
+    }   
+
+    updateAccountFax(contIds);
+    }  
+    //pass accIds and contactIds
+    public static void updateAccountFax(set <id> contIdsAcc) {
+        List<Account> listOfAcc = [select id,fax, (select fax from Contacts where main_contact_person__c = true order by LastModifiedDate desc LIMIT 1)from Account where id in : contIdsAcc];
+        system.debug(listOfAcc);
+        for (Account eachAcc : listOfAcc) {
+            eachAcc.Fax = eachAcc.Contacts[0].Fax;
+            
+        }
+        if(!listOfAcc.isEmpty()){
+        update listOfAcc;
+            
+        }                       
+   }
 }
