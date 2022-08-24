@@ -27,9 +27,9 @@ trigger contactTrigger on Contact (before insert, before update, after insert,af
     if (trigger.isBefore&&trigger.isInsert) {
         ContactTriggerHandler.contactUpdate(trigger.new, trigger.newMap, trigger.old, trigger.oldMap);
     }
-    if (trigger.isAfter&&trigger.isUpdate){
-        ContactTriggerHandler.updateAccountFax(Trigger.New, Trigger.Old,Trigger.NewMap,  Trigger.OldMap);
-    }
+   // if (trigger.isAfter&&trigger.isUpdate){
+     //   ContactTriggerHandler.updateAccountFax(Trigger.New, Trigger.Old,Trigger.NewMap,  Trigger.OldMap);
+    //}
 
 
     //     System.debug('Before Trigger');
