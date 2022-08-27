@@ -46,10 +46,14 @@ public with sharing class SalesForceProjectTriggerHandler {
         try{
     //create one empty list of ticket
             List<Salesforce_Ticket__c> newSTList = new List<Salesforce_Ticket__c>();
+            DefaultTicketInfo__c ticketinfo=  DefaultTicketInfo__c.getOrgDefaults();
             for (salesforce_project__c eachSP : spTriggerNew) {
                 Salesforce_Ticket__c st = new Salesforce_Ticket__c();
+                st.Subject__c=ticketinfo.Subject__c;
                 st.Subject__c = 'Default ST';
                 st.Salesforce_Project__c = eachSP.id;
+                st.Description__c= ticketinfo.description__c;
+                st.Priority__c='High';
                 newSTList.add(st);
             }
             if(!newSTList.isEmpty()){
