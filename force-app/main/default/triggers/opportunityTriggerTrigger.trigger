@@ -34,11 +34,11 @@ trigger opportunityTriggerTrigger on Opportunity (before insert,after insert,bef
             }
         }
     }
-    if(trigger.isDelete&&trigger.isBefore){
-        for(Opportunity eachOpp: trigger.old){
-            setIds.add(eachOpp.AccountId);
-        }
-    }
+    // if(trigger.isDelete&&trigger.isBefore){
+    //     for(Opportunity eachOpp: trigger.old){
+    //         setIds.add(eachOpp.AccountId);
+    //     }
+    // }
     if(!setIds.isEmpty()){
         //call it when NOT already CALLED>
         if(OpportunityTriggerHandler.futureCalled == false){
