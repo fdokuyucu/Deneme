@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="DEMO GENEL CALISMA" >
+        <div class="slds-var-m-around_medium">
+            My name is : {fullName}<br/>
+            My Job is : {Job}<br/>
+            My country is : {location.Country}
+        </div>
+        <div class="slds-var-m-around_medium">
+            <lightning-combobox
+            label="Class"
+            value={value}
+            placeholder="Class adi"
+            options={options}
+            onchange={handleChange} >
+        </lightning-combobox>
+        <p>Selected value is: {value}</p>
+        </div>
+    
+    <div class="slds-var-m-around_medium">
+        <template if:true={deger}>
+            {degerTrue}
+        </template>
+        <template if:false={deger}>
+            {degerFalse}
+        </template>
+    </div>
+    <div class="slds-var-m-around_medium">
+        <lightning-button variant="success" label="deger" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+    </div>
+    
+    </lightning-card>
+
+</template>

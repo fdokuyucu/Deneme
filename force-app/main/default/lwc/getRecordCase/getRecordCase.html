@@ -1,0 +1,21 @@
+<template>
+    <lightning-card title="GET RECORD FROM : CASE" icon-name="standard:case">
+        <div class="slds-var-m-around_medium">
+            <strong> Approach 1:</strong><br/>
+            Account Name:{account}<br/>
+            Contact Name: {contact}<br/>
+            Case Number: {casenumber} <br/>
+            Subject: {subject}
+        </div>
+
+        <div class="slds-var-m-around_medium">
+            <template if:true={cs}>
+            <strong> Approach 2:</strong><br/>
+            Account Name:{cs.fields.Account.displayValue}<br/>
+            Contact Name: {cs.fields.Contact.displayValue}<br/>
+            Case Number: {cs.fields.CaseNumber.value} <br/>
+            Subject: {cs.fields.Subject.value}
+        </template>
+        </div>    
+    </lightning-card>
+</template>

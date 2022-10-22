@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="Full Names">
+        <div class="slds-var-m-around_small">
+            <template for:each={contacts} for:item="contact">
+                <div key={contact.firstName}>
+                    <b> First Name:</b> {contact.firstName},
+                    <b> Last Name:</b> {contact.LastName}
+                </div>
+            </template>
+            We have 3 contacts
+        </div>
+    </lightning-card>    
+</template>

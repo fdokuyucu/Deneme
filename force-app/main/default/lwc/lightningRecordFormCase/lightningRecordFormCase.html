@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="LIGHTNING FORM : CASE" icon-name="standard:case">
+        <div class="slds-var-m-around_large">
+            <lightning-record-form
+                record-id={redordId}
+                object-api-name={objectName}
+                layout-type={layoutType}
+                onsuccess={successHandler}>
+                <div class="slds-align_absolute-center">
+                    <lightning-button
+                    variant="neutral"
+                    label="Cancel"
+                    class="slds-var-m-around_small"
+                    type="reset">
+                    </lightning-button>
+                    <lightning-button
+                    variant="brand"
+                    label="Save"
+                    type="submit">
+                    </lightning-button>
+                </div>
+            </lightning-record-form>
+        </div>
+    </lightning-card>
+</template>
