@@ -1,10 +1,10 @@
 <template>
-    <strong>SEARCH RESULTS:</strong><br/>
     <template if:true={result}>
+    <strong>SEARCH RESULTS:</strong><br/>
         <lightning-datatable
-        key-field="Id"
-        data={result}
-        columns={columns}>
+            key-field="Id"
+            data={result}
+            columns={columns}>
     </lightning-datatable>
     </template>
     <template if:true={error}>
